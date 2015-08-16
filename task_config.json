@@ -1,0 +1,20 @@
+{
+    "database": {
+        "username": "gopher",
+        "password": "go",
+        "name": "dkondratovych_task",
+        "port": 3306,
+        "hostname": "localhost",
+        "parameters": "?charset=utf8&parseTime=True&loc=Local",
+        "protocol": "tcp",
+
+        "gorm_singular_table": true,
+        "gorm_log_mode": false
+    },
+    "server": {
+        "port": ":8080"
+    },
+    "application": {
+        "log_file_path": "task.log"
+    }
+}

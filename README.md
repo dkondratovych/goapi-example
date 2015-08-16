@@ -35,3 +35,94 @@ type Task struct {
 }
 ```
 
+Task requests information
+
+1) DELETE http://localhost:8080/api/v1/tasks
+
+Content type: application/json
+
+Body:
+{
+  "id": 1
+}
+
+Response:
+204 - Delete was successful. No body content.
+404 - Internal server error.
+
+
+2) POST http://localhost:8080/api/v1/tasks
+
+Content type: application/json
+
+Body:
+{
+	"title" : "Dima Test",
+	"description" : "Description",
+	"priority" : 1,
+	"completedAt" : "2015-08-16T18:50:26+07:00",
+	"isDeleted": false,
+	"isCompleted": true
+}
+
+"completedAt" should be formatted according to RFC3339
+
+Response:
+201 - Task was added successfully.
+Response Body:
+{"data":{"url":"/api/v1/tasks/5"},"metadata":null}
+
+
+404 - Internal server error.
+
+
+3) GET http://localhost:8080/api/v1/tasks/1
+
+Responses
+404 - Task is not found
+500 - Internal server error
+
+200 - Task was found
+{
+    data: {
+        id: 1,
+        Title: "test",
+        Description: "",
+        Priority: null,
+        createdAt: "0001-01-01T00:00:00Z",
+        updatedAt: "2015-08-16T18:05:04+07:00",
+        completedAt: "0001-01-01T00:00:00Z",
+        IsDeleted: true,
+        IsCompleted: false
+    },
+    metadata: null
+}
+
+4) PUT http://localhost:8080/api/v1/tasks
+
+Content type: application/json
+
+Body Example 1:
+{
+    "taskId": 1,
+    "task" : {
+    	"title" : "Test",
+    	"description" : "Test desc",
+    	"priority" : 2,
+    	"completedAt" : "2015-08-16T18:50:26+07:00",
+    	"isDeleted": true,
+    	"isCompleted": false
+    }
+}
+
+Body Example 2:
+{
+    "taskId": 1,
+    "task" : {
+    	"title" : "Test"
+    }
+}
+
+500 - Internal server error
+404 - Task in not found
+200 - Task was updated
