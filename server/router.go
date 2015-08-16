@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 
-	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/version"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/handlers"
 )

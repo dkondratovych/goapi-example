@@ -2,10 +2,12 @@ package server
 
 import (
 	"os"
+	"fmt"
+
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/config"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages"
 	"github.com/gin-gonic/gin"
-	"fmt"
+	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/middleware"
 )
 
 type Server struct {
@@ -56,6 +58,7 @@ func(s *Server) InitHttpLogger() error {
 func(s *Server) SetMiddleware() error {
 	s.Router.Use(gin.Logger())
 	s.Router.Use(gin.Recovery())
+	s.Router.Use(middleware.Cors())
 
 	return nil
 }
