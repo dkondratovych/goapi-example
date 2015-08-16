@@ -11,7 +11,7 @@ import (
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 )
 
-type TaskAddRequest struct {
+type AddTaskRequest struct {
 	Title       string `json:"title"`
 	Description *string `json:"description"`
 	Priority    *int64 `json:"priority"`
@@ -21,7 +21,7 @@ type TaskAddRequest struct {
 }
 
 func(th *TaskHandler) Add(c *gin.Context) {
-	ta := &TaskAddRequest{}
+	ta := &AddTaskRequest{}
 	if err := c.BindJSON(ta); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
 			ErrorCodeId: 54, // some fictional code

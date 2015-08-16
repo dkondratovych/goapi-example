@@ -12,6 +12,7 @@
         "gorm_log_mode": false
     },
     "server": {
+        "http_log_file": "task_http.log",
         "port": ":8080"
     },
     "application": {

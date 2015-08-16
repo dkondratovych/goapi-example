@@ -8,12 +8,12 @@ import (
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/responses"
 )
 
-type TaskDeleteRequest struct {
+type DeleteTaskRequest struct {
 	Id int `json:"id" binding:"required"`
 }
 
 func(th *TaskHandler) Delete(c *gin.Context) {
-	td := &TaskDeleteRequest{}
+	td := &DeleteTaskRequest{}
 
 	if err := c.BindJSON(td); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{

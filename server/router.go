@@ -8,9 +8,7 @@ import (
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/handlers"
 )
 
-func(s *Server) InitRouter() {
-	s.Router = gin.Default()
-
+func(s *Server) SetRoutes() {
 	taskHandler := (&handlers.TaskHandler{})
 	taskHandler.SetStorage(s.StorageProvider)
 
@@ -20,5 +18,4 @@ func(s *Server) InitRouter() {
 	v.GET("/tasks/:id", taskHandler.Find)
 	v.PUT("/tasks", taskHandler.Update)
 	v.DELETE("/tasks", taskHandler.Delete)
-
 }

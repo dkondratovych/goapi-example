@@ -9,8 +9,7 @@ import (
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 )
 
-
-type TaskUpdateRequest struct {
+type UpdateTaskRequest struct {
 	TaskId int `json:"taskId"`
 	Task struct {
 		 Title       string `json:"title"`
@@ -23,7 +22,7 @@ type TaskUpdateRequest struct {
 }
 
 func(th *TaskHandler) Update(c *gin.Context) {
-	ta := &TaskUpdateRequest{}
+	ta := &UpdateTaskRequest{}
 	if err := c.BindJSON(ta); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
 			ErrorCodeId: 53, // some fictional code

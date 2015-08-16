@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"net/http"
 	"strconv"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
