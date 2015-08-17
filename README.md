@@ -39,7 +39,9 @@ Task requests information
 
 1) DELETE http://localhost:8080/api/v1/tasks
 
+Headers:
 Content type: application/json
+Authorization: Bearer %token%
 
 Body:
 {
@@ -53,7 +55,9 @@ Response:
 
 2) POST http://localhost:8080/api/v1/tasks
 
+Headers:
 Content type: application/json
+Authorization: Bearer %token%
 
 Body:
 {
@@ -78,6 +82,10 @@ Response Body:
 
 3) GET http://localhost:8080/api/v1/tasks/1
 
+Headers:
+Content type: application/json
+Authorization: Bearer %token%
+
 Responses
 404 - Task is not found
 500 - Internal server error
@@ -100,7 +108,9 @@ Responses
 
 4) PUT http://localhost:8080/api/v1/tasks
 
+Headers:
 Content type: application/json
+Authorization: Bearer %token%
 
 Body Example 1:
 {
@@ -126,3 +136,19 @@ Body Example 2:
 500 - Internal server error
 404 - Task in not found
 200 - Task was updated
+
+
+5) POST http://localhost:8080/auth
+
+Content type: application/json
+
+Request body
+{
+    "username": "Bender",
+    "password": "molly"
+}
+
+Response body
+{
+    "token":"token_string"
+}

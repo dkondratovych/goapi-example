@@ -28,7 +28,7 @@ func(s *Server) Run() error {
 	if err := s.InitHttpLogger(); err != nil {
 		return err
 	}
-	s.SetMiddleware()
+	s.SeDefaultMiddleware()
 	s.SetRoutes()
 
 	err := s.Router.Run(s.Config.Server.Port)
@@ -55,10 +55,11 @@ func(s *Server) InitHttpLogger() error {
 	return nil
 }
 
-func(s *Server) SetMiddleware() error {
+func(s *Server) SeDefaultMiddleware() error {
 	s.Router.Use(gin.Logger())
 	s.Router.Use(gin.Recovery())
 	s.Router.Use(middleware.Cors())
+	s.Router.Use(middleware.Application(s.Config))
 
 	return nil
 }
