@@ -14,8 +14,8 @@ type Config struct {
 	Database	*Database 		`json:"database"`
 	Application *Application	`json:"application"`
 	Server		*Server			`json:"server`
-
-	ConfigPath string			`json:-`
+	Facebook 	*Facebook		`json:"facebook"`
+	ConfigPath	string			`json:-`
 }
 
 

@@ -23,5 +23,8 @@ func(s *Server) SetRoutes() {
 	// Init Auth handler
 	authHandler := (&handlers.AuthHandler{})
 	authHandler.SetConfig(s.Config)
-	s.Router.POST("/auth", authHandler.Auth)
+	s.Router.POST("/auth/jwt", authHandler.JwtAuth)
+
+	s.Router.GET("/auth/facebook", authHandler.FacebookAuth)
+	s.Router.GET("/auth/facebook/callback", authHandler.FacebookCallback)
 }

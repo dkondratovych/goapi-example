@@ -3,10 +3,16 @@ package server
 import (
 	"os"
 	"fmt"
+	"net/http"
+
+
+	"github.com/gin-gonic/gin"
+	"github.com/markbates/goth"
+	"github.com/markbates/goth/gothic"
+	"github.com/markbates/goth/providers/facebook"
 
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/config"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages"
-	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/middleware"
 )
 
@@ -29,6 +35,7 @@ func(s *Server) Run() error {
 		return err
 	}
 	s.SeDefaultMiddleware()
+	s.InitGothic()
 	s.SetRoutes()
 
 	err := s.Router.Run(s.Config.Server.Port)
@@ -41,6 +48,16 @@ func(s *Server) Run() error {
 
 func(s *Server) InitRouter() {
 	s.Router = gin.New()
+}
+
+func(s *Server) InitGothic() {
+	goth.UseProviders(
+		facebook.New(s.Config.Facebook.AppId, s.Config.Facebook.Secret, s.Config.Facebook.CallbackURL),
+	)
+	// Since we are using only ONE provider, FACEBOOK - it doesn't have make sense to parse url for provider name
+	gothic.GetProviderName = func(req *http.Request) (string, error) {
+		return "facebook", nil
+	}
 }
 
 func(s *Server) InitHttpLogger() error {

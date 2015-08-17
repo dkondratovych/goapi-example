@@ -18,5 +18,10 @@
     },
     "application": {
         "log_file_path": "task.log"
+    },
+    "facebook": {
+        "appId":"1480060685644026",
+        "secret":"ab48cdc4cd1fa9167c33614786635cfe",
+        "callbackURL":"http://localhost:8080/auth/facebook/callback"
     }
 }

@@ -152,3 +152,9 @@ Response body
 {
     "token":"token_string"
 }
+
+
+6) Facebook auth.
+GET http://localhost:8080/auth/facebook
+
+Facebook Redirect URL http://localhost:8080/auth/facebook/callback
