@@ -1,0 +1,3 @@
+development:
+    driver: mysql
+    open: gopher:go@tcp(localhost:3306)/dkondratovych_task
