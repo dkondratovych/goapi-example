@@ -18,9 +18,9 @@ func (ah *AuthHandler) FacebookCallback(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
-			ErrorCodeId: 78, // some fictional code
+			ErrorCodeId:      78, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured whipe processing your request.",
+			UserMessage:      "An error occured whipe processing your request.",
 		})
 		return
 	}
@@ -29,8 +29,7 @@ func (ah *AuthHandler) FacebookCallback(c *gin.Context) {
 
 	c.JSON(http.StatusOK, map[string]string{
 		"UserAccessToken": user.AccessToken,
-		"UserName": user.Name,
-		"UserEmail": user.Email,
+		"UserName":        user.Name,
+		"UserEmail":       user.Email,
 	})
 }
-

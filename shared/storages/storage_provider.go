@@ -1,8 +1,8 @@
 package storages
 
 import (
-	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 	"github.com/jinzhu/gorm"
+	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 )
 
 type IStorageProvider interface {

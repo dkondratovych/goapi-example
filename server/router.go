@@ -3,12 +3,12 @@ package server
 import (
 	"fmt"
 
-	"github.com/seesawlabs/Dima-Kondravotych-Exercise/version"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/handlers"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/middleware"
+	"github.com/seesawlabs/Dima-Kondravotych-Exercise/version"
 )
 
-func(s *Server) SetRoutes() {
+func (s *Server) SetRoutes() {
 	// Init Task handler
 	taskHandler := (&handlers.TaskHandler{})
 	taskHandler.SetStorage(s.StorageProvider)

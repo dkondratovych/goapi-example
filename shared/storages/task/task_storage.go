@@ -49,7 +49,7 @@ func (ts *TaskStorage) FindById(id int) (*Task, error) {
 func (ts *TaskStorage) UpdateById(id int, taskUpdates *Task) error {
 	task := &Task{}
 
-	db:= ts.DB.First(&task, id).Update(taskUpdates)
+	db := ts.DB.First(&task, id).Update(taskUpdates)
 
 	if db.RecordNotFound() {
 		return ErrTaskNotFound

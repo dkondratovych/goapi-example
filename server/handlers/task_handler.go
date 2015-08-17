@@ -7,4 +7,3 @@ import (
 type TaskHandler struct {
 	handlers.CommonHandler
 }
-

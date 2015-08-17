@@ -1,8 +1,8 @@
 package database
 
 import (
-	"github.com/jinzhu/gorm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/config"
 )

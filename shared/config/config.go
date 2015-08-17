@@ -1,9 +1,9 @@
 package config
 
 import (
-	"os"
-	"errors"
 	"encoding/json"
+	"errors"
+	"os"
 )
 
 var (
@@ -11,13 +11,12 @@ var (
 )
 
 type Config struct {
-	Database	*Database 		`json:"database"`
-	Application *Application	`json:"application"`
-	Server		*Server			`json:"server`
-	Facebook 	*Facebook		`json:"facebook"`
-	ConfigPath	string			`json:-`
+	Database    *Database    `json:"database"`
+	Application *Application `json:"application"`
+	Server      *Server      `json:"server`
+	Facebook    *Facebook    `json:"facebook"`
+	ConfigPath  string       `json:-`
 }
-
 
 func (c *Config) Load(configPath string) error {
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
@@ -45,5 +44,3 @@ func (c *Config) Load(configPath string) error {
 func NewConfig() *Config {
 	return &Config{}
 }
-
-

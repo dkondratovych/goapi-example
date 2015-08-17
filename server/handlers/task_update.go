@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"time"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/responses"
@@ -11,33 +11,33 @@ import (
 
 type UpdateTaskRequest struct {
 	TaskId int `json:"taskId"`
-	Task struct {
-		 Title       string `json:"title"`
-		 Description *string `json:"description"`
-		 Priority    *int64 `json:"priority"`
-		 CompletedAt *time.Time `json:"completedAt"`
-		 IsDeleted   bool `json:"isDeleted"`
-		 IsCompleted bool `json:"isCompleted"`
-	 } `json:"task"`
+	Task   struct {
+		Title       string     `json:"title"`
+		Description *string    `json:"description"`
+		Priority    *int64     `json:"priority"`
+		CompletedAt *time.Time `json:"completedAt"`
+		IsDeleted   bool       `json:"isDeleted"`
+		IsCompleted bool       `json:"isCompleted"`
+	} `json:"task"`
 }
 
-func(th *TaskHandler) Update(c *gin.Context) {
+func (th *TaskHandler) Update(c *gin.Context) {
 	ta := &UpdateTaskRequest{}
 	if err := c.BindJSON(ta); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
-			ErrorCodeId: 53, // some fictional code
+			ErrorCodeId:      53, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured while processing your request.",
+			UserMessage:      "An error occured while processing your request.",
 		})
 		return
 	}
 
 	taskUpdates := &task.Task{
-		Title: ta.Task.Title,
+		Title:       ta.Task.Title,
 		Description: ta.Task.Description,
-		Priority: ta.Task.Priority,
+		Priority:    ta.Task.Priority,
 		CompletedAt: ta.Task.CompletedAt,
-		IsDeleted: ta.Task.IsDeleted,
+		IsDeleted:   ta.Task.IsDeleted,
 		IsCompleted: ta.Task.IsCompleted,
 	}
 
@@ -46,17 +46,17 @@ func(th *TaskHandler) Update(c *gin.Context) {
 	if err != nil {
 		if err == task.ErrTaskNotFound {
 			c.JSON(http.StatusNotFound, responses.ResponseError{
-				ErrorCodeId: 22, // some fictional code
+				ErrorCodeId:      22, // some fictional code
 				DeveloperMessage: err.Error(),
-				UserMessage: "Task you are looking for does not exists.",
+				UserMessage:      "Task you are looking for does not exists.",
 			})
 			return
 		}
 
-		c.JSON(http.StatusInternalServerError,  responses.ResponseError{
-			ErrorCodeId: 60, // some fictional code
+		c.JSON(http.StatusInternalServerError, responses.ResponseError{
+			ErrorCodeId:      60, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured while processing your request.",
+			UserMessage:      "An error occured while processing your request.",
 		})
 		return
 	}

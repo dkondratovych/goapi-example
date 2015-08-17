@@ -4,22 +4,22 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/responses"
+	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages/task"
 )
 
 type DeleteTaskRequest struct {
 	Id int `json:"id" binding:"required"`
 }
 
-func(th *TaskHandler) Delete(c *gin.Context) {
+func (th *TaskHandler) Delete(c *gin.Context) {
 	td := &DeleteTaskRequest{}
 
 	if err := c.BindJSON(td); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
-			ErrorCodeId: 54, // some fictional code
+			ErrorCodeId:      54, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured whipe processing your request.",
+			UserMessage:      "An error occured whipe processing your request.",
 		})
 		return
 	}
@@ -28,18 +28,18 @@ func(th *TaskHandler) Delete(c *gin.Context) {
 
 	if err == task.ErrTaskNotFound {
 		c.JSON(http.StatusNotFound, responses.ResponseError{
-			ErrorCodeId: 22, // some fictional code
+			ErrorCodeId:      22, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "Task you are looking for does not exists.",
+			UserMessage:      "Task you are looking for does not exists.",
 		})
 		return
 	}
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError,  responses.ResponseError{
-			ErrorCodeId: 55, // some fictional code
+		c.JSON(http.StatusInternalServerError, responses.ResponseError{
+			ErrorCodeId:      55, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured while processing your request.",
+			UserMessage:      "An error occured while processing your request.",
 		})
 		return
 	}

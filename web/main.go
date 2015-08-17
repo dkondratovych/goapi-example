@@ -1,9 +1,9 @@
 package main
 
 import (
-	"log"
 	"flag"
 	"fmt"
+	"log"
 
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise"
 )

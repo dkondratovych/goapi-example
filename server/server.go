@@ -1,35 +1,34 @@
 package server
 
 import (
-	"os"
 	"fmt"
 	"net/http"
-
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/facebook"
 
+	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/middleware"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/config"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/shared/storages"
-	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/middleware"
 )
 
 type Server struct {
-	Config *config.Config
+	Config          *config.Config
 	StorageProvider storages.IStorageProvider
-	Router *gin.Engine
+	Router          *gin.Engine
 }
 
 func NewServer(c *config.Config, sp storages.IStorageProvider) *Server {
 	return &Server{
-		Config: c,
+		Config:          c,
 		StorageProvider: sp,
 	}
 }
 
-func(s *Server) Run() error {
+func (s *Server) Run() error {
 	s.InitRouter()
 	if err := s.InitHttpLogger(); err != nil {
 		return err
@@ -46,11 +45,11 @@ func(s *Server) Run() error {
 	return nil
 }
 
-func(s *Server) InitRouter() {
+func (s *Server) InitRouter() {
 	s.Router = gin.New()
 }
 
-func(s *Server) InitGothic() {
+func (s *Server) InitGothic() {
 	goth.UseProviders(
 		facebook.New(s.Config.Facebook.AppId, s.Config.Facebook.Secret, s.Config.Facebook.CallbackURL),
 	)
@@ -60,7 +59,7 @@ func(s *Server) InitGothic() {
 	}
 }
 
-func(s *Server) InitHttpLogger() error {
+func (s *Server) InitHttpLogger() error {
 	file, err := os.OpenFile(s.Config.Server.HttpLogFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 
 	if err != nil {
@@ -72,7 +71,7 @@ func(s *Server) InitHttpLogger() error {
 	return nil
 }
 
-func(s *Server) SeDefaultMiddleware() error {
+func (s *Server) SeDefaultMiddleware() error {
 	s.Router.Use(gin.Logger())
 	s.Router.Use(gin.Recovery())
 	s.Router.Use(middleware.Cors())
@@ -80,4 +79,3 @@ func(s *Server) SeDefaultMiddleware() error {
 
 	return nil
 }
-

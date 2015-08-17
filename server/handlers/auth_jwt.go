@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"time"
 	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/responses"
-	"github.com/dgrijalva/jwt-go"
 )
 
 type AuthorizationRequest struct {
@@ -17,16 +17,16 @@ type AuthorizationRequest struct {
 const (
 	FakeUserName = "Bender"
 	FakePassword = "molly"
-	FakeUserId = 11
+	FakeUserId   = 11
 )
 
 func (ah *AuthHandler) JwtAuth(c *gin.Context) {
 	authRequest := &AuthorizationRequest{}
 	if err := c.BindJSON(authRequest); err != nil {
 		c.JSON(http.StatusInternalServerError, responses.ResponseError{
-			ErrorCodeId: 54, // some fictional code
+			ErrorCodeId:      54, // some fictional code
 			DeveloperMessage: err.Error(),
-			UserMessage: "An error occured whipe processing your request.",
+			UserMessage:      "An error occured whipe processing your request.",
 		})
 		return
 	}
@@ -41,9 +41,9 @@ func (ah *AuthHandler) JwtAuth(c *gin.Context) {
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.ResponseError{
-				ErrorCodeId: 21, // some fictional code
+				ErrorCodeId:      21, // some fictional code
 				DeveloperMessage: err.Error(),
-				UserMessage: "An error occured while user authorization.",
+				UserMessage:      "An error occured while user authorization.",
 			})
 			return
 		}
@@ -52,9 +52,9 @@ func (ah *AuthHandler) JwtAuth(c *gin.Context) {
 
 	} else {
 		c.JSON(http.StatusUnauthorized, responses.ResponseError{
-			ErrorCodeId: 22, // some fictional code
+			ErrorCodeId:      22, // some fictional code
 			DeveloperMessage: "Username or password is invalid.",
-			UserMessage: "Username or password is invalid.",
+			UserMessage:      "Username or password is invalid.",
 		})
 		return
 	}

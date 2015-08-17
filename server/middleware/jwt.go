@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 	"github.com/seesawlabs/Dima-Kondravotych-Exercise/server/responses"
 )
 
@@ -14,9 +14,9 @@ func JwtAuth() gin.HandlerFunc {
 		jwtSecretKey, ok := c.Get("JwtSecretKey")
 		if !ok {
 			c.JSON(http.StatusInternalServerError, responses.ResponseError{
-				ErrorCodeId: 54, // some fictional code
+				ErrorCodeId:      54, // some fictional code
 				DeveloperMessage: "JWT secret token is missed.",
-				UserMessage: "Auth has failed.",
+				UserMessage:      "Auth has failed.",
 			})
 			c.Abort()
 		}
@@ -34,14 +34,13 @@ func JwtAuth() gin.HandlerFunc {
 			return jsk, nil
 		})
 
-
 		if err == nil && token.Valid {
 			c.Next()
 		} else {
 			c.JSON(http.StatusForbidden, responses.ResponseError{
-				ErrorCodeId: 34, // some fictional code
+				ErrorCodeId:      34, // some fictional code
 				DeveloperMessage: err.Error(),
-				UserMessage: "Auth has failed.",
+				UserMessage:      "Auth has failed.",
 			})
 			c.Abort()
 		}
