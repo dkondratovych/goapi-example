@@ -21,7 +21,7 @@ func JwtAuth() gin.HandlerFunc {
 			c.Abort()
 		}
 
-		// Loos weird, but we have to do this conversion.
+		// Looks weird, but we have to do this conversion.
 		// Jwt lib is trying to do assertion on []byte type
 		var jsk interface{}
 		jwtSecretKeyString := jwtSecretKey.(string)

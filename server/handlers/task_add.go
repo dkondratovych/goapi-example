@@ -53,6 +53,10 @@ func (th *TaskHandler) Add(c *gin.Context) {
 
 	c.JSON(http.StatusCreated,
 		responses.CommonResponse{
-			Data: map[string]string{"url": fmt.Sprintf("/api/%s/tasks/%d", version.Version, st.Id)}})
+			Data: map[string]string{
+				"url": fmt.Sprintf("/api/%s/tasks/%d", version.Version, st.Id),
+			},
+		},
+	)
 
 }
