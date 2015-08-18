@@ -14,7 +14,7 @@ import (
 type AddTaskRequest struct {
 	Title       string     `json:"title"`
 	Description *string    `json:"description"`
-	Priority    *int64     `json:"priority"`
+	Priority    *int       `json:"priority"`
 	CompletedAt *time.Time `json:"completedAt"`
 	IsDeleted   bool       `json:"isDeleted"`
 	IsCompleted bool       `json:"isCompleted"`

@@ -35,6 +35,27 @@ type Task struct {
 }
 ```
 
+QUICK START
+1) Create database with permissions
+CREATE DATABASE dkondratovych_task;
+
+CREATE USER 'gopher'@'localhost' IDENTIFIED BY 'go';
+GRANT ALL PRIVILEGES ON dkondratovych_task . * TO 'gopher'@'localhost';
+FLUSH PRIVILEGES;
+
+2) Install dependencies. Run install.sh
+
+3) Run database migrations. Run goose up
+
+4) Build and install
+go build
+go install
+
+5) Try next API calls. :)
+
+6) Full list routes with OPTIONS routes you can find in github.com/seesawlabs/Dima-Kondravotych-Exercise/server/router.go
+
+
 Task requests information
 
 1) DELETE http://localhost:8080/api/v1/tasks
@@ -138,7 +159,7 @@ Body Example 2:
 200 - Task was updated
 
 
-5) POST http://localhost:8080/auth
+5) POST http://localhost:8080/auth/jwt
 
 Content type: application/json
 
@@ -152,7 +173,6 @@ Response body
 {
     "token":"token_string"
 }
-
 
 6) Facebook auth.
 GET http://localhost:8080/auth/facebook

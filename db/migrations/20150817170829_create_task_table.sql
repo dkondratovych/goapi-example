@@ -2,7 +2,7 @@
 -- +goose Up
 CREATE TABLE IF NOT EXISTS task (
   id int(11) NOT NULL AUTO_INCREMENT,
-  title varchar(256) DEFAULT NULL,
+  title varchar(256) NOT NULL,
   description varchar(256) DEFAULT NULL,
   priority int(11) DEFAULT NULL,
   created_at datetime DEFAULT NULL,
