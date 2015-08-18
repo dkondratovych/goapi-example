@@ -37,7 +37,7 @@ func (ah *AuthHandler) JwtAuth(c *gin.Context) {
 		t.Claims["UserName"] = FakeUserName
 		t.Claims["exp"] = time.Now().Add(time.Hour * 70).Unix()
 
-		ts, err := t.SignedString(ah.Config.Server.JwtSecret)
+		ts, err := t.SignedString([]byte(ah.Config.Server.JwtSecret))
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.ResponseError{
