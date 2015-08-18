@@ -55,6 +55,7 @@ go install
 
 6) Full list routes with OPTIONS routes you can find in github.com/seesawlabs/Dima-Kondravotych-Exercise/server/router.go
 
+7) Run application with flag -config /path/to/task_config.json
 
 Task requests information
 
