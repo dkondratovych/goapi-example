@@ -35,3 +35,147 @@ type Task struct {
 }
 ```
 
+QUICK START
+1) Create database with permissions
+CREATE DATABASE dkondratovych_task;
+
+CREATE USER 'gopher'@'localhost' IDENTIFIED BY 'go';
+GRANT ALL PRIVILEGES ON dkondratovych_task . * TO 'gopher'@'localhost';
+FLUSH PRIVILEGES;
+
+2) Install dependencies. Run install.sh
+
+3) Run database migrations. Run goose up
+
+4) Build and install
+go build
+go install
+
+5) Try next API calls. :)
+
+6) Full list routes with OPTIONS routes you can find in github.com/seesawlabs/Dima-Kondravotych-Exercise/server/router.go
+
+7) Run application with flag -config /path/to/task_config.json
+
+Task requests information
+
+1) DELETE http://localhost:8080/api/v1/tasks
+
+Headers:
+Content type: application/json
+Authorization: Bearer %token%
+
+Body:
+{
+  "id": 1
+}
+
+Response:
+204 - Delete was successful. No body content.
+404 - Internal server error.
+
+
+2) POST http://localhost:8080/api/v1/tasks
+
+Headers:
+Content type: application/json
+Authorization: Bearer %token%
+
+Body:
+{
+	"title" : "Dima Test",
+	"description" : "Description",
+	"priority" : 1,
+	"completedAt" : "2015-08-16T18:50:26+07:00",
+	"isDeleted": false,
+	"isCompleted": true
+}
+
+"completedAt" should be formatted according to RFC3339
+
+Response:
+201 - Task was added successfully.
+Response Body:
+{"data":{"url":"/api/v1/tasks/5"},"metadata":null}
+
+
+404 - Internal server error.
+
+
+3) GET http://localhost:8080/api/v1/tasks/1
+
+Headers:
+Content type: application/json
+Authorization: Bearer %token%
+
+Responses
+404 - Task is not found
+500 - Internal server error
+
+200 - Task was found
+{
+    data: {
+        id: 1,
+        Title: "test",
+        Description: "",
+        Priority: null,
+        createdAt: "0001-01-01T00:00:00Z",
+        updatedAt: "2015-08-16T18:05:04+07:00",
+        completedAt: "0001-01-01T00:00:00Z",
+        IsDeleted: true,
+        IsCompleted: false
+    },
+    metadata: null
+}
+
+4) PUT http://localhost:8080/api/v1/tasks
+
+Headers:
+Content type: application/json
+Authorization: Bearer %token%
+
+Body Example 1:
+{
+    "taskId": 1,
+    "task" : {
+    	"title" : "Test",
+    	"description" : "Test desc",
+    	"priority" : 2,
+    	"completedAt" : "2015-08-16T18:50:26+07:00",
+    	"isDeleted": true,
+    	"isCompleted": false
+    }
+}
+
+Body Example 2:
+{
+    "taskId": 1,
+    "task" : {
+    	"title" : "Test"
+    }
+}
+
+500 - Internal server error
+404 - Task in not found
+200 - Task was updated
+
+
+5) POST http://localhost:8080/auth/jwt
+
+Content type: application/json
+
+Request body
+{
+    "username": "Bender",
+    "password": "molly"
+}
+
+Response body
+{
+    "token":"token_string"
+}
+
+6) Facebook auth.
+GET http://localhost:8080/auth/facebook
+
+Facebook Redirect URL http://localhost:8080/auth/facebook/callback

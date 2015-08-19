@@ -1,0 +1,27 @@
+{
+    "database": {
+        "username": "gopher",
+        "password": "go",
+        "name": "dkondratovych_task",
+        "port": 3306,
+        "hostname": "localhost",
+        "parameters": "?charset=utf8&parseTime=True&loc=Local",
+        "protocol": "tcp",
+
+        "gorm_singular_table": true,
+        "gorm_log_mode": false
+    },
+    "server": {
+        "http_log_file": "task_http.log",
+        "port": ":8080",
+        "jwt_secret": "secret"
+    },
+    "application": {
+        "log_file_path": "task.log"
+    },
+    "facebook": {
+        "appId":"1480060685644026",
+        "secret":"ab48cdc4cd1fa9167c33614786635cfe",
+        "callbackURL":"http://localhost:8080/auth/facebook/callback"
+    }
+}
